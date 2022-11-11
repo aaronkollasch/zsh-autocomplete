@@ -19,6 +19,7 @@ if [[ -n $_autocomplete__unambiguous ]] &&
       compstate[insert]='automenu-'
   compstate[insert]+=unambiguous
   unset _autocomplete__unambiguous
+  typeset -g STARSHIP_RESET_PROMPT_NEWLINES=2
   return
 fi
 
@@ -65,4 +66,9 @@ if [[ $RBUFFER != [[:space:]]* ]]; then
   fi
   [[ -n ${comptags:*spacetags} ]] &&
       compstate[insert]+=' '
+fi
+
+if (( nmatches <= 1 )); then
+  # handle two-line starship prompt
+  typeset -g STARSHIP_RESET_PROMPT_NEWLINES=2
 fi

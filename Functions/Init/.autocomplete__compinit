@@ -109,6 +109,12 @@ EOF
     MENUSCROLL=0
   }
 
+  .autocomplete__patch _expand_alias
+  _expand_alias() {
+    autocomplete:_expand_alias:old "$@"
+    return 1
+  }
+
   _expand() {
     local word=$words[CURRENT]
     [[ $word == (|*[^\\])\`?*\`* || $word == (|*[^\\])'$('*')'* ]] &&

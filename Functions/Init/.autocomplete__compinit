@@ -122,6 +122,9 @@ EOF
 
     local special=${(j:|:)${(kb)parameters[(R)*-special]}}
     [[
+        $word == *\\[[:space:]]* ||
+        $word == *\\ ||
+        $word == (\"|\')* ||
         $word == *'$'($~special)(|[^[:alnum:]]*) ||
         $word == *'$'($~special)(:[/:[:alnum:]]*)#(|[^[:alnum:]]*) ||
         $word == *'${'(|\(?*\))[^_[:alnum:]]#($~special)(:?*)#'}'*

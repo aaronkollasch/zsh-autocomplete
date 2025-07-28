@@ -37,6 +37,9 @@ fi
       fi
     fi
     compstate[insert]='menu:'
+  elif [[ $WIDGET == (|.)reverse-menu-select ]]; then
+    typeset -gi MENUSELECT=0
+    compstate[insert]='menu:'
   fi
   if [[ $WIDGET == (|.)reverse-* || $WIDGETSTYLE == (|.)reverse-menu-complete ]]; then
     compstate[insert]+='0'

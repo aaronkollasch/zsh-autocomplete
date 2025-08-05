@@ -38,7 +38,12 @@ local format
 zstyle -s ":completion:${curcontext}:unambiguous" format format ||
     format=$'%{\e[0;2m%}%Bcommon substring:%b %0F%11K%d%f%k'
 
-zformat -F format "$format" "d:$compstate[unambiguous]"
+# zformat -F not supported for zsh < 5.9
+if is-at-least 5.9; then
+    zformat -F format "$format" "d:$compstate[unambiguous]"
+else
+    zformat -f format "$format" "d:$compstate[unambiguous]"
+fi
 
 builtin compadd -J "$tag" -x "$format"
 
